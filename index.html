@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI情绪整理伴侣｜心理指南针</title>
+<meta name="description" content="AI情绪整理伴侣：用结构化对话卡，帮助你把焦虑、内耗、睡前乱想整理成清晰下一步。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <div class="brand">心理指南针</div>
+  <a href="#try">立即试用</a>
+  <a href="#cards">对话卡</a>
+  <a href="#buy" class="nav-cta">9.9体验</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-text">
+    <div class="tag">AI情绪整理工具 · 30张自救对话卡</div>
+    <h1>焦虑、内耗、睡不着时<br>让AI帮你把情绪整理清楚</h1>
+    <p>如果你也有焦虑、睡不着、情绪不稳定、失恋后反复内耗等情况，不如试试这款 <strong>AI情绪整理伴侣</strong>。它不替代心理咨询，但能帮你把混乱情绪拆成事实、想法、需求和下一步行动。</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#try">免费试用</a>
+      <a class="btn secondary" href="#cards">查看对话卡</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="phone">
+      <div class="phone-title">今天你想整理什么？</div>
+      <button>😵‍💫 焦虑停不下来</button>
+      <button>🌙 睡前胡思乱想</button>
+      <button>🧠 一直内耗</button>
+      <button>💔 失恋后反复想起对方</button>
+    </div>
+  </div>
+</header>
+
+<section class="pain">
+  <h2>这些时刻，可以先用它帮你理清楚</h2>
+  <div class="grid">
+    <div>晚上睡不着，脑子停不下来</div>
+    <div>失恋后反复想起对方</div>
+    <div>一点小事就情绪不稳定</div>
+    <div>拖延、自责、越想越乱</div>
+  </div>
+</section>
+
+<section id="try" class="try">
+  <h2>试用：生成你的情绪整理提示词</h2>
+  <div class="try-box">
+    <label>选择场景</label>
+    <select id="scenario"></select>
+    <label>写下你的情况</label>
+    <textarea id="situation" placeholder="例如：我最近失恋了，晚上总是反复想起对方，睡不着，也不知道自己该怎么办。"></textarea>
+    <button id="generate" class="btn primary">生成提示词</button>
+    <pre id="result"></pre>
+    <button id="copy" class="btn secondary">复制提示词</button>
+  </div>
+</section>
+
+<section id="cards" class="cards-section">
+  <h2>AI情绪整理对话卡</h2>
+  <p class="section-sub">复制对应场景，粘贴到 ChatGPT / 豆包 / Kimi 等AI工具里即可使用。</p>
+  <div id="cardGrid" class="cards"></div>
+</section>
+
+<section class="how">
+  <h2>怎么使用？</h2>
+  <ol>
+    <li>选择一个最接近你当前状态的对话卡。</li>
+    <li>复制提示词，粘贴到AI工具。</li>
+    <li>补充你的真实情况。</li>
+    <li>让AI帮你拆解事实、想法、担心和下一步行动。</li>
+  </ol>
+</section>
+
+<section id="buy" class="buy">
+  <h2>首发体验版</h2>
+  <div class="price">¥9.9</div>
+  <p>包含30张AI情绪整理自救对话卡，覆盖焦虑、内耗、睡前整理、拖延、关系情绪、自责修复。</p>
+  <button class="btn primary" onclick="alert('后续可接入小红书店铺、微信收款或知识星球交付链接。')">准备上架</button>
+</section>
+
+<section class="safe">
+  <h2>重要说明</h2>
+  <p>本工具仅用于情绪整理、自我觉察和行动拆解，不属于心理咨询、医学诊断或治疗服务，不能替代专业心理咨询师、医生或线下支持。如你正处于强烈痛苦、失控或无法保证安全的状态，请立即联系身边可信任的人、监护人、老师、当地紧急服务或专业机构。</p>
+</section>
+
+<footer>© 心理指南针 · AI情绪整理伴侣</footer>
+<script src="app.js"></script>
+</body>
+</html>
