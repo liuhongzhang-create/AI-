@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function(){
 const cards=[
 {module:'焦虑拆解',title:'焦虑五分法',prompt:'我现在很焦虑，请不要急着安慰我。请帮我把我的情况拆成：1. 已经发生的事实；2. 我脑子里的想象；3. 我真正担心的事情；4. 我能控制的部分；5. 我现在可以做的一个10分钟内小行动。请用清晰、冷静、具体的方式回答。'},
 {module:'焦虑拆解',title:'事实 vs 脑补',prompt:'请帮我分析这件事里，哪些是已经发生的事实，哪些是我脑子里推演出来的想象。最后请告诉我：现在最值得处理的一件小事是什么。'},
@@ -24,9 +25,29 @@ const scenario=document.getElementById('scenario');
 const situation=document.getElementById('situation');
 const result=document.getElementById('result');
 const cardGrid=document.getElementById('cardGrid');
-cards.forEach((c,i)=>{const opt=document.createElement('option');opt.value=i;opt.textContent=`${c.module}｜${c.title}`;scenario.appendChild(opt);});
-function build(){const c=cards[Number(scenario.value)||0];const text=situation.value.trim();result.textContent=`${c.prompt}\n\n我的具体情况：${text||'（在这里补充你的真实情况）'}\n\n请先帮我拆清楚，不要空泛安慰。最后给我一个10分钟内能做的小行动。`;}
-document.getElementById('generate').onclick=build;
-document.getElementById('copy').onclick=()=>navigator.clipboard.writeText(result.textContent).then(()=>{document.getElementById('copy').textContent='已复制';setTimeout(()=>document.getElementById('copy').textContent='复制提示词',1200)});
-cards.forEach(c=>{const div=document.createElement('div');div.className='card';div.innerHTML=`<div class="module">${c.module}</div><h3>${c.title}</h3><p>${c.prompt}</p><button class="copy-card">复制</button>`;div.querySelector('button').onclick=()=>navigator.clipboard.writeText(c.prompt).then(()=>{div.querySelector('button').textContent='已复制';setTimeout(()=>div.querySelector('button').textContent='复制',1200)});cardGrid.appendChild(div);});
+const generateBtn=document.getElementById('generate');
+const copyBtn=document.getElementById('copy');
+
+cards.forEach((c,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=`${c.module}｜${c.title}`;scenario.appendChild(opt);});
+function build(){
+  const c=cards[Number(scenario.value)||0];
+  const text=situation.value.trim();
+  result.textContent=`${c.prompt}\n\n我的具体情况：${text||'（在这里补充你的真实情况）'}\n\n请先帮我拆清楚，不要空泛安慰。最后给我一个10分钟内能做的小行动。`;
+  result.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function fallbackCopy(text){
+  const ta=document.createElement('textarea');
+  ta.value=text;document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');}catch(e){}
+  ta.remove();
+}
+async function copyText(text){
+  if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(text);}else{fallbackCopy(text);}
+}
+generateBtn.addEventListener('click',function(e){e.preventDefault();build();});
+generateBtn.addEventListener('touchend',function(e){e.preventDefault();build();},{passive:false});
+copyBtn.addEventListener('click',async function(e){e.preventDefault();await copyText(result.textContent);copyBtn.textContent='已复制';setTimeout(()=>copyBtn.textContent='复制提示词',1200);});
+
+cards.forEach(c=>{const div=document.createElement('div');div.className='card';div.innerHTML=`<div class="module">${c.module}</div><h3>${c.title}</h3><p>${c.prompt}</p><button type="button" class="copy-card">复制</button>`;div.querySelector('button').addEventListener('click',async function(){await copyText(c.prompt);this.textContent='已复制';setTimeout(()=>this.textContent='复制',1200);});cardGrid.appendChild(div);});
 build();
+});
