@@ -1,4 +1,13 @@
+if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+window.addEventListener('pageshow', function(){
+  if (!window.location.hash) {
+    setTimeout(function(){ window.scrollTo(0, 0); }, 0);
+    setTimeout(function(){ window.scrollTo(0, 0); }, 120);
+  }
+});
+
 document.addEventListener('DOMContentLoaded', function(){
+if (!window.location.hash) { window.scrollTo(0, 0); }
 const cards=[
 {module:'焦虑拆解',title:'焦虑五分法',prompt:'我现在很焦虑，请不要急着安慰我。请帮我把我的情况拆成：1. 已经发生的事实；2. 我脑子里的想象；3. 我真正担心的事情；4. 我能控制的部分；5. 我现在可以做的一个10分钟内小行动。请用清晰、冷静、具体的方式回答。'},
 {module:'焦虑拆解',title:'事实 vs 脑补',prompt:'请帮我分析这件事里，哪些是已经发生的事实，哪些是我脑子里推演出来的想象。最后请告诉我：现在最值得处理的一件小事是什么。'},
@@ -50,4 +59,5 @@ copyBtn.addEventListener('click',async function(e){e.preventDefault();await copy
 
 cards.forEach(c=>{const div=document.createElement('div');div.className='card';div.innerHTML=`<div class="module">${c.module}</div><h3>${c.title}</h3><p>${c.prompt}</p><button type="button" class="copy-card">复制</button>`;div.querySelector('button').addEventListener('click',async function(){await copyText(c.prompt);this.textContent='已复制';setTimeout(()=>this.textContent='复制',1200);});cardGrid.appendChild(div);});
 build();
+if (!window.location.hash) { setTimeout(function(){ window.scrollTo(0, 0); }, 200); }
 });
